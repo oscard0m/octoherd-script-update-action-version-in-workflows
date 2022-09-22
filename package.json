@@ -1,0 +1,37 @@
+{
+  "name": "octoherd-script-update-action-version-in-workflows",
+  "version": "0.0.0-development",
+  "type": "module",
+  "exports": "./script.js",
+  "bin": {
+    "octoherd-script-update-action-version-in-workflows": "./cli.js"
+  },
+  "description": "Update workflows using a certain GitHub Action to a concrete version, i.e. actions/checkout@v{version_number}",
+  "scripts": {
+    "start": "node cli.js",
+    "test": "uvu . .*\\.test.js"
+  },
+  "repository": "https://github.com/oscard0m/octoherd-script-update-action-version-in-workflows",
+  "keywords": [
+    "octoherd-script"
+  ],
+  "author": "Oscar Dominguez <dominguez.celada@gmail.com> (https://www.oscardom.dev)",
+  "license": "ISC",
+  "dependencies": {
+    "@octoherd/cli": "^3.4.11",
+    "@octokit/plugin-create-or-update-text-file": "^2.0.2",
+    "chalk": "^5.0.1",
+    "js-yaml": "^4.1.0",
+    "matcher": "^5.0.0",
+    "terminal-link": "^3.0.0"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "devDependencies": {
+    "nock": "^13.2.9",
+    "uvu": "^0.5.6"
+  }
+}
