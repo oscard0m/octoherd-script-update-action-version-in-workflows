@@ -21,7 +21,6 @@
     "@octoherd/cli": "^3.4.11",
     "@octokit/plugin-create-or-update-text-file": "^2.0.2",
     "chalk": "^5.0.1",
-    "js-yaml": "^4.1.0",
     "matcher": "^5.0.0",
     "terminal-link": "^3.0.0"
   },

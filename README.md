@@ -37,15 +37,6 @@ npx octoherd-script-update-action-version-in-workflows \
 | `--octoherd-repos`, `-R`     | array of strings | One or multiple space-separated repositories in the form of `repo-owner/repo-name`. `repo-owner/*` will find all repositories for one owner. `*` will find all repositories the user has access to. Will prompt for repositories if not set |
 | `--octoherd-bypass-confirms` | boolean          | Bypass prompts to confirm mutating requests                                                                                                                                                                                                 |
 
-## Caveats
-
-`js-yaml` does not preserve comments in yaml files so bear in mind this script might get rid of the comments inside the modified files:
-
-- https://github.com/nodeca/js-yaml/issues/624
-- https://github.com/nodeca/js-yaml/issues/494
-- https://github.com/nodeca/js-yaml/issues/305
-- https://github.com/nodeca/js-yaml/issues/196
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
