@@ -2,9 +2,9 @@
 
 import { isMatch } from "matcher";
 import { composeCreateOrUpdateTextFile } from "@octokit/plugin-create-or-update-text-file";
-import yaml from "js-yaml";
 import chalk from "chalk";
 import terminalLink from "terminal-link";
+import { replaceActionVersionInWorkflow } from "./utils.js";
 
 /**
  * Update workflows using a certain GitHub Action to a concrete version, i.e. actions/checkout@v{version_number}
@@ -86,57 +86,7 @@ export async function script(
         owner,
         repo,
         path: `.github/workflows/${fileName}`,
-        content({ content }) {
-          /** @type {import("./types").Workflow} */
-          let config;
-          let actionVersionChanged = false;
-
-          if (!content) {
-            return content;
-          }
-
-          try {
-            config = yaml.load(content);
-          } catch (error) {
-            octokit.log.warn(chalk.yellow(`  ⚠ Invalid YAML: ${fileName}`));
-            return content;
-          }
-
-          if (!config?.jobs) {
-            octokit.log.warn(chalk.yellow(`  ⚠ No jobs in ${fileName}`));
-            return content;
-          }
-
-          for (const [jobName, job] of Object.entries(config.jobs)) {
-            if (!job.steps) {
-              octokit.log.warn(
-                chalk.yellow(`  ⚠ No steps in ${fileName} -> [job]: ${jobName}`)
-              );
-              continue;
-            }
-
-            for (const step of job.steps) {
-              if ("uses" in step && step.uses.startsWith(actionName)) {
-                if (step.uses === `${actionName}@${actionVersion}`) {
-                  octokit.log.info(
-                    chalk.gray(
-                      ` ▶▶ ${fileName} -> [job]: ${jobName} -> already uses ${actionName}@${actionVersion}`
-                    )
-                  );
-                } else {
-                  step.uses = `${actionName}@${actionVersion}`;
-                  actionVersionChanged = true;
-                }
-              }
-            }
-          }
-
-          if (!actionVersionChanged) return content;
-
-          return yaml.dump(config, {
-            quotingType: '"',
-          });
-        },
+        content: replaceActionVersionInWorkflow(actionName, actionVersion),
         message: `ci(${fileName}): set version ${actionVersion} to ${actionName}`,
       });
 
