@@ -24,11 +24,6 @@
     "matcher": "^5.0.0",
     "terminal-link": "^3.0.0"
   },
-  "release": {
-    "branches": [
-      "main"
-    ]
-  },
   "devDependencies": {
     "nock": "^13.2.9",
     "uvu": "^0.5.6"
