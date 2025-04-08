@@ -22,7 +22,7 @@
     "@octokit/plugin-create-or-update-text-file": "^3.0.0",
     "chalk": "^5.0.1",
     "matcher": "^5.0.0",
-    "terminal-link": "^3.0.0"
+    "terminal-link": "^4.0.0"
   },
   "devDependencies": {
     "nock": "^13.2.9",
